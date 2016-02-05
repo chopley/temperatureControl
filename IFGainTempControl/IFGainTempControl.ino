@@ -248,7 +248,7 @@ void loop(void) {
 //  } 
   
   
-  errorVal=abs(Setpoint-Input);
+  errorVal=abs(Setpoint1-Input1);
   if(errorVal<errorWindow){
    errorState=1 ;
   }

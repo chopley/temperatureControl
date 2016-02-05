@@ -2,6 +2,9 @@
 #include <PID_v1.h>
 #include <Metro.h>
 #define RelayPin 11
+
+
+
 #define LEDPin 4
 double Setpoint, Input, Output;
 
@@ -9,7 +12,7 @@ double errorVal,errorWindow; //to keep the temperature error
 int errorState,ledState; // state of the error (either within athe window or not)
 
 //Specify the links and initial tuning parameters
-PID myPID(&Input, &Output, &Setpoint,20,0.1,0, DIRECT);
+PID myPID(&Input, &Output, &Setpoint,50,0.1,0, DIRECT);
 
 //int WindowSize = 10000;
 //unsigned long windowStartTime;
@@ -105,7 +108,7 @@ void setup(void) {
   // initialize inputs/outputs
   // start serial port
   //windowStartTime = millis();
-  Setpoint = 35;
+  Setpoint = 40;
   errorWindow=0.5;
   ledState=0; //start the indicator LED in off mode
   int jj;
@@ -119,6 +122,8 @@ void setup(void) {
   myPID.SetMode(AUTOMATIC);
   //myPID.SetTunings(100,0.1,0);
   pinMode(RelayPin,OUTPUT);
+
+  
   pinMode(LEDPin,OUTPUT);
  
 }
@@ -235,8 +240,5 @@ void loop(void) {
   myPID.Compute();
   
   analogWrite(RelayPin,Output);
-  
-
-
   
 }
